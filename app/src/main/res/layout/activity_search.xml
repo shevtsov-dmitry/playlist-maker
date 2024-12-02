@@ -13,11 +13,11 @@
         android:background="?attr/colorButtonNormal"
         android:elevation="4dp" />
 
-    <!-- Search View -->
-    <androidx.appcompat.widget.SearchView
+    <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Search Songs"
-        android:iconifiedByDefault="false" />
+        android:iconifiedByDefault="false"
+        android:queryHint="Искать песню" />
+
 </LinearLayout>

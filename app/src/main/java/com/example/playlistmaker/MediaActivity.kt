@@ -19,7 +19,7 @@ import java.io.File
 
 class MediaActivity : AppCompatActivity() {
 
-    val REQUEST_CODE_PERMISSION = 123
+    private val REQUEST_CODE_PERMISSION = 123
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

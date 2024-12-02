@@ -6,7 +6,6 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -39,9 +38,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Open SearchActivity when search button is clicked
         searchButton.setOnClickListener {
-            navigateToSearchActivity()
+            try {
+                navigateToSearchActivity()
+            } catch (e: Exception) {
+                Toast.makeText(this, "Не удалось перейти на страницу поиска", Toast.LENGTH_SHORT).show()
+                e.printStackTrace()  // For debugging
+            }
         }
     }
 

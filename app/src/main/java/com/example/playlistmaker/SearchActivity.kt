@@ -14,6 +14,7 @@ class SearchActivity : AppCompatActivity() {
         // Set up the Toolbar with a back button
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // Enable back button
 
         // Initialize the SearchView
@@ -39,3 +40,5 @@ class SearchActivity : AppCompatActivity() {
         return true
     }
 }
+
+
