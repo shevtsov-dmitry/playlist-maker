@@ -19,15 +19,19 @@ class MediaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_media)
 
         val songListView: ListView = findViewById(R.id.songListView)
+        val noSongsMessage: TextView = findViewById(R.id.no_songs_message)
 
         val songs = getSongsFromStorage()
-        var songsAmount = songs?.count ?: 0
+        val songsAmount = songs?.count ?: 0
 
         if (songsAmount == 0) {
-            // Show a message if no songs are found
-            Toast.makeText(this, "Песни не найдены.", Toast.LENGTH_LONG).show()
+            // Show the "No songs found" message
+            noSongsMessage.visibility = View.VISIBLE
+            songListView.visibility = View.GONE // Hide the ListView when no songs are found
         } else {
-            // Display the songs in a ListView
+            // Hide the "No songs found" message
+            noSongsMessage.visibility = View.GONE
+            // Show the ListView with songs
             val adapter = SimpleCursorAdapter(
                 this,
                 android.R.layout.simple_list_item_1, // Simple item layout for each song
@@ -36,8 +40,8 @@ class MediaActivity : AppCompatActivity() {
                 intArrayOf(android.R.id.text1), // Which text view to use
                 0
             )
-
             songListView.adapter = adapter
+            songListView.visibility = View.VISIBLE
         }
     }
 

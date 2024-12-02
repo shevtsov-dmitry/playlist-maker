@@ -11,12 +11,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="16dp"
-        android:text="Песни не найдены на устройстве."
+        android:text="@string/songs_not_found"
         android:textSize="18sp"
         android:visibility="gone" />
 
     <ListView
         android:id="@+id/songListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
