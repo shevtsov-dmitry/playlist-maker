@@ -1,0 +1,7 @@
+<resources>
+    <!-- Dark Mode Colors -->
+    <color name="backgroundColor">#121212</color>
+    <color name="primaryTextColor">#E1E1E1</color>
+    <color name="buttonColor">#BB86FC</color>
+    <color name="shadowColor">#3700B3</color>
+</resources>

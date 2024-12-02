@@ -1,10 +1,11 @@
-package com.example.playlistmaker;
+package com.example.playlistmaker
 
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.Toolbar
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -14,6 +15,11 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        // Set up the Toolbar with a back button
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // Enable back button
 
         // Initialize SharedPreferences to save the mode preference
         sharedPreferences = getSharedPreferences("app_preferences", MODE_PRIVATE)
@@ -29,8 +35,8 @@ class SettingsActivity : AppCompatActivity() {
 
         // Set an OnCheckedChangeListener to save the preference
         darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
-                // Save the dark mode preference
-                sharedPreferences.edit().putBoolean("dark_mode", isChecked).apply()
+            // Save the dark mode preference
+            sharedPreferences.edit().putBoolean("dark_mode", isChecked).apply()
 
             // Change the theme based on the switch position
             if (isChecked) {
@@ -46,5 +52,11 @@ class SettingsActivity : AppCompatActivity() {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
+    }
+
+    // Handle back button press
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()  // Navigate back to the previous activity
+        return true
     }
 }
