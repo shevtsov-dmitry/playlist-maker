@@ -19,25 +19,29 @@ class MainActivity : AppCompatActivity() {
 
         val mediaButton: Button = findViewById(R.id.btn_media)
         val settingsButton: Button = findViewById(R.id.btn_settings)
+        val searchButton: Button = findViewById(R.id.btn_search)  // Add reference to btn_search
 
+        // Open SettingsActivity when settings button is clicked
         settingsButton.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
 
-        // Set an OnClickListener for the button
+        // Check permission and navigate to MediaActivity when media button is clicked
         mediaButton.setOnClickListener {
             // Check Android version to determine which permission to request
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                // For Android 13 (API level 33) and above, use READ_MEDIA_AUDIO
                 checkAndRequestPermission(android.Manifest.permission.READ_MEDIA_AUDIO)
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                // For Android 6.0 (API level 23) to Android 12 (API level 32), use READ_EXTERNAL_STORAGE
                 checkAndRequestPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
             } else {
-                // For older versions (below Android 6.0), no runtime permission is required
                 navigateToMediaActivity()
             }
+        }
+
+        // Open SearchActivity when search button is clicked
+        searchButton.setOnClickListener {
+            navigateToSearchActivity()
         }
     }
 
@@ -58,6 +62,12 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToMediaActivity() {
         // Start MediaActivity when permission is granted
         val intent = Intent(this, MediaActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToSearchActivity() {
+        // Start SearchActivity when the search button is clicked
+        val intent = Intent(this, SearchActivity::class.java)
         startActivity(intent)
     }
 

@@ -5,6 +5,14 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorButtonNormal"
+        android:elevation="4dp"
+        android:title="Media" />
+
     <TextView
         android:id="@+id/no_songs_message"
         android:layout_width="wrap_content"
@@ -26,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/open_songs_folder"
-        android:visibility="visible"
+        android:text="Открыть папку с музыкой"
+        android:visibility="gone"
         android:layout_marginTop="16dp"/>
 </LinearLayout>
