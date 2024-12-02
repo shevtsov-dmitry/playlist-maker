@@ -9,5 +9,6 @@
     <string name="settings_btn_label">Настройки ⚙️</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="songs_not_found">Песни не найдены на устройстве.</string>
+    <string name="songs_not_found">Песни не найдены на устройстве. Их необходимо поместить в папку Music.</string>
+    <string name="open_songs_folder">Открыть папку с музыкой.</string>
 </resources>

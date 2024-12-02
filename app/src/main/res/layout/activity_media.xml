@@ -19,4 +19,14 @@
         android:id="@+id/songListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <!-- Button to open the songs folder -->
+    <Button
+        android:id="@+id/openFolderButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/open_songs_folder"
+        android:visibility="visible"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>
