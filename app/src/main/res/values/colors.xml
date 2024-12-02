@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Light Mode Colors -->
     <color name="backgroundColor">#F5F5F5</color>
-    <color name="primaryTextColor">#FFFFFF</color>
-    <color name="buttonColor">#6200EE</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="buttonColor">#8F4CEF</color>
     <color name="shadowColor">#3700B3</color>
 </resources>

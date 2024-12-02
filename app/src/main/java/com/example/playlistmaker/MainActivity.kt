@@ -13,27 +13,17 @@ import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
-    private val permissionRequest =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-            if (granted) {
-                // Permission granted, proceed to MediaActivity
-                navigateToMediaActivity()
-            } else {
-                // Show a message if permission is denied
-                Toast.makeText(
-                    this,
-                    "В разрешении отказано. Не удается получить доступ к аудиофайлам.",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Get the media button
         val mediaButton: Button = findViewById(R.id.btn_media)
+        val settingsButton: Button = findViewById(R.id.btn_settings)
+
+        settingsButton.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
 
         // Set an OnClickListener for the button
         mediaButton.setOnClickListener {
