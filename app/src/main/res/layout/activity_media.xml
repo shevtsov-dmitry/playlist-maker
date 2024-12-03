@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorButtonNormal"
         android:elevation="4dp"
-        android:title="Media" />
+        android:title="@string/media_title" />
 
     <TextView
         android:id="@+id/no_songs_message"
@@ -35,6 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:text="Открыть папку с музыкой"
+        android:text="@string/open_music_folder"
         android:visibility="gone" />
 </LinearLayout>

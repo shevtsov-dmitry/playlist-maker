@@ -42,7 +42,7 @@
             android:id="@+id/user_agreement_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Пользовательское соглашение"
+            android:text="@string/user_agreement_title"
             android:layout_below="@id/switch_dark_mode"
             android:layout_marginTop="16dp"
             android:background="@color/shadowColor" />

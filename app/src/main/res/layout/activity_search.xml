@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:iconifiedByDefault="false"
-            android:queryHint="Искать песню" />
+            android:queryHint="@string/search_song" />
 
     <ListView
             android:id="@+id/songListView"

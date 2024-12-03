@@ -15,4 +15,12 @@
     <string name="settings_title">Настройки</string>
     <string name="dark_mode_slider">Использовать тёмный режим</string>
     <string name="user_agreement">Пользовательское соглашение</string>
+    <string name="user_agreement_title">Пользовательское соглашение</string>
+    <string name="share_app_title">Поделиться приложением</string>
+    <string name="we_answer_soon">Мы ответим в ближайшее время</string>
+    <string name="enter_email">Введи вашу электронную почту</string>
+    <string name="describe_problem">Опишите возникшую проблему</string>
+    <string name="open_music_folder">Открыть папку с музыкой</string>
+    <string name="media_title">Медиатека</string>
+    <string name="search_song">Искать песню</string>
 </resources>

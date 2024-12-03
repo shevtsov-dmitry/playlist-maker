@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"></com.google.android.material.appbar.AppBarLayout>
+            android:fitsSystemWindows="true" />
 
     <include layout="@layout/content_main" />
 
@@ -36,5 +36,5 @@
             android:layout_margin="16dp"
             android:background="@drawable/circular_button"
             android:src="@drawable/share"
-            android:contentDescription="Поделиться приложением" />
+            android:contentDescription="@string/share_app_title" />
 </RelativeLayout>
