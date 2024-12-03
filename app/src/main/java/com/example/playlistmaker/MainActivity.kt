@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
@@ -18,7 +19,8 @@ class MainActivity : AppCompatActivity() {
 
         val mediaButton: Button = findViewById(R.id.btn_media)
         val settingsButton: Button = findViewById(R.id.btn_settings)
-        val searchButton: Button = findViewById(R.id.btn_search)  // Add reference to btn_search
+        val searchButton: Button = findViewById(R.id.btn_search)
+        val shareButton: AppCompatImageButton = findViewById(R.id.share_button)
 
         // Open SettingsActivity when settings button is clicked
         settingsButton.setOnClickListener {
@@ -28,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
         // Check permission and navigate to MediaActivity when media button is clicked
         mediaButton.setOnClickListener {
-            // Check Android version to determine which permission to request
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 checkAndRequestPermission(android.Manifest.permission.READ_MEDIA_AUDIO)
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -38,22 +39,26 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Navigate to SearchActivity
         searchButton.setOnClickListener {
             try {
                 navigateToSearchActivity()
             } catch (e: Exception) {
-                Toast.makeText(this, "Не удалось перейти на страницу поиска", Toast.LENGTH_SHORT).show()
-                e.printStackTrace()  // For debugging
+                Toast.makeText(this, "Ошибка при переходе на страницу поиска", Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
             }
+        }
+
+        // Share Application functionality
+        shareButton.setOnClickListener {
+            shareApplication()
         }
     }
 
     private fun checkAndRequestPermission(permission: String) {
         if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
-            // Permission already granted, go to MediaActivity
             navigateToMediaActivity()
         } else {
-            // Request permission
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(permission),
@@ -63,25 +68,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateToMediaActivity() {
-        // Start MediaActivity when permission is granted
         val intent = Intent(this, MediaActivity::class.java)
         startActivity(intent)
     }
 
     private fun navigateToSearchActivity() {
-        // Start SearchActivity when the search button is clicked
         val intent = Intent(this, SearchActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun shareApplication() {
+        val shareText = "Ознакомьтесь с нашим потрясающим приложением! Группа: [Пока не выбрана]"
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, shareText)
+        }
+        try {
+            startActivity(Intent.createChooser(shareIntent, "Share via"))
+        } catch (e: Exception) {
+            Toast.makeText(this, "No apps available for sharing", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, proceed to MediaActivity
                 navigateToMediaActivity()
             } else {
-                // Permission denied
                 Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
             }
         }
