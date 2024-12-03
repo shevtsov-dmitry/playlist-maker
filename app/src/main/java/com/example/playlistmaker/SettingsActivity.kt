@@ -1,22 +1,26 @@
 package com.example.playlistmaker
 
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
-import android.view.View
+import android.widget.Button
 import android.widget.EditText
-import android.widget.Switch
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatImageButton
+import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.widget.Toolbar
-import androidx.appcompat.app.AlertDialog
 
 class SettingsActivity : AppCompatActivity() {
 
-    private lateinit var darkModeSwitch: Switch
+    private lateinit var darkModeSwitch: SwitchCompat
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var supportButton: AppCompatImageButton
+    private lateinit var userAgreementButton: Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +68,20 @@ class SettingsActivity : AppCompatActivity() {
         supportButton.setOnClickListener {
             showSupportDialog()
         }
+
+        // Set up the User Agreement button
+        userAgreementButton = findViewById(R.id.user_agreement_button)
+        userAgreementButton.setOnClickListener {
+            openUserAgreement()
+        }
+    }
+
+    // Function to open the User Agreement in the default browser
+    private fun openUserAgreement() {
+        val url = "https://vivt.ru/"
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 
     // Handle back button press
@@ -85,7 +103,6 @@ class SettingsActivity : AppCompatActivity() {
                 val email = emailEditText.text.toString()
                 val message = messageEditText.text.toString()
 
-                // Here you can add the logic to send the email and message to your server
                 sendMessageToSupport(email, message)
             }
             .setNegativeButton("Отменить", null)
@@ -93,9 +110,12 @@ class SettingsActivity : AppCompatActivity() {
         builder.create().show()
     }
 
-    // Simulate sending the message and show a confirmation
+    // TODO send message to server
     private fun sendMessageToSupport(email: String, message: String) {
-        // For demo purposes, we'll just show a Toast. You can replace this with actual sending logic.
-        Toast.makeText(this, "Сообщение отправлено. Ждите ответа в близжайшее время.", Toast.LENGTH_LONG).show()
+        Toast.makeText(
+            this,
+            "Сообщение отправлено. Ждите ответа в ближайшее время.",
+            Toast.LENGTH_LONG
+        ).show()
     }
 }

@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorButtonNormal"
-            android:elevation="4dp"/>
+            android:elevation="4dp" />
 
     <TextView
             android:id="@+id/settings_title"
@@ -31,12 +31,22 @@
             android:layout_below="@id/settings_title"
             android:layout_marginBottom="16dp" />
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_dark_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/settings_title"
             android:layout_alignParentEnd="true" />
+
+    <Button
+            android:id="@+id/user_agreement_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Пользовательское соглашение"
+            android:layout_below="@id/switch_dark_mode"
+            android:layout_marginTop="16dp"
+            android:background="@color/shadowColor" />
+    <!--            android:textColor="@color/material_dynamic_neutral99"-->
 
     <!-- Floating Action Button (FAB) for support -->
     <androidx.appcompat.widget.AppCompatImageButton
