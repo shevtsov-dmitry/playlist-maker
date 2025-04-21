@@ -26,10 +26,10 @@ class MediaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_media)
 
-        // Setup the Toolbar with back button
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) // Show back button
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val songListView: ListView = findViewById(R.id.songListView)
         val noSongsMessage: TextView = findViewById(R.id.no_songs_message)
@@ -38,34 +38,24 @@ class MediaActivity : AppCompatActivity() {
         val songsAmount = songs?.count ?: 0
 
         if (songsAmount == 0) {
-            // Show the "No songs found" message
+
             noSongsMessage.visibility = View.VISIBLE
-            songListView.visibility = View.GONE // Hide the ListView when no songs are found
+            songListView.visibility = View.GONE
         } else {
             noSongsMessage.visibility = View.GONE
-            // Show the ListView with songs
-            val adapter = SimpleCursorAdapter(
-                this,
-                android.R.layout.simple_list_item_1, // Simple item layout for each song
-                songs,
-                arrayOf(MediaStore.Audio.Media.TITLE), // Column to display
-                intArrayOf(android.R.id.text1), // Which text view to use
-                0
-            )
+            val adapter = SongCursorAdapter(this, songs)
             songListView.adapter = adapter
             songListView.visibility = View.VISIBLE
         }
     }
 
     private fun getSongsFromStorage(): Cursor? {
-        // The URI to query the songs in the Music directory
+
         val musicUri: Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
 
-        // Projection columns
+
         val projection = arrayOf(
-            MediaStore.Audio.Media._ID,
-            MediaStore.Audio.Media.TITLE,
-            MediaStore.Audio.Media.DATA
+            MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.DATA
         )
 
         val resolver: ContentResolver = contentResolver
@@ -79,12 +69,14 @@ class MediaActivity : AppCompatActivity() {
         )
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String>, grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == REQUEST_CODE_PERMISSION) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, proceed to open the folder
+
                 openSongsFolder()
             } else {
                 Toast.makeText(this, "Отказано в доступе", Toast.LENGTH_LONG).show()
@@ -93,23 +85,22 @@ class MediaActivity : AppCompatActivity() {
     }
 
     private fun openSongsFolder() {
-        val musicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
+        val musicDirectory =
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
         val directory = File(musicDirectory.path)
 
         if (directory.exists() && directory.isDirectory) {
-            val folderUri = Uri.parse("file://$musicDirectory") // Use 'file://' URI
-
-            // Create an intent to open the folder in a file manager
+            val folderUri = Uri.parse("file://$musicDirectory")
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 data = folderUri
-                type = "resource/folder" // MIME type for folder browsing
+                type = "resource/folder"
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
             }
 
             try {
-                startActivity(intent) // Try starting the activity to open the folder
+                startActivity(intent)
             } catch (e: ActivityNotFoundException) {
-                // Handle the case where no file manager is found
+
                 Toast.makeText(this, "Нет доступа к менеджеру файлов.", Toast.LENGTH_LONG).show()
             }
         } else {
@@ -117,9 +108,9 @@ class MediaActivity : AppCompatActivity() {
         }
     }
 
-    // Handle the back button click (to navigate back)
+
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()  // Go back when the up button is pressed
+        onBackPressed()
         return true
     }
 }

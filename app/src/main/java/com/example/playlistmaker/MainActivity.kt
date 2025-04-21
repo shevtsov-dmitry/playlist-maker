@@ -22,13 +22,13 @@ class MainActivity : AppCompatActivity() {
         val searchButton: Button = findViewById(R.id.btn_search)
         val shareButton: AppCompatImageButton = findViewById(R.id.share_button)
 
-        // Open SettingsActivity when settings button is clicked
+
         settingsButton.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
 
-        // Check permission and navigate to MediaActivity when media button is clicked
+
         mediaButton.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 checkAndRequestPermission(android.Manifest.permission.READ_MEDIA_AUDIO)
@@ -39,30 +39,32 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Navigate to SearchActivity
+
         searchButton.setOnClickListener {
             try {
                 navigateToSearchActivity()
             } catch (e: Exception) {
-                Toast.makeText(this, "Ошибка при переходе на страницу поиска", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Ошибка при переходе на страницу поиска", Toast.LENGTH_SHORT)
+                    .show()
                 e.printStackTrace()
             }
         }
 
-        // Share Application functionality
+
         shareButton.setOnClickListener {
             shareApplication()
         }
     }
 
     private fun checkAndRequestPermission(permission: String) {
-        if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this, permission
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             navigateToMediaActivity()
         } else {
             ActivityCompat.requestPermissions(
-                this,
-                arrayOf(permission),
-                REQUEST_CODE_PERMISSIONS
+                this, arrayOf(permission), REQUEST_CODE_PERMISSIONS
             )
         }
     }
@@ -90,7 +92,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
