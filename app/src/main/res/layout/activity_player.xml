@@ -31,7 +31,7 @@
             android:id="@+id/song_artist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Artist Name"
+            android:text="Pharrell Williams"
             android:textSize="16sp"
             android:textColor="@color/primaryTextColor" />
 
@@ -64,8 +64,8 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:background="@drawable/circular_button"
-                android:src="@android:drawable/btn_star_big_off"
-                android:contentDescription="Like" />
+                android:contentDescription="Like"
+                android:src="@android:drawable/btn_star_big_off" />
         </LinearLayout>
 
         <TextView
@@ -86,6 +86,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textColor="#888888"
                 android:text="Длительность" />
 
             <TextView
@@ -97,6 +99,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#888888"
                 android:layout_marginTop="12dp"
                 android:text="Альбом" />
 
@@ -109,6 +112,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#888888"
                 android:layout_marginTop="12dp"
                 android:text="Год" />
 
@@ -122,6 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:textColor="#888888"
                 android:text="Жанр" />
 
             <TextView
@@ -133,6 +138,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#888888"
                 android:layout_marginTop="12dp"
                 android:text="Страна" />
 
@@ -141,6 +147,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Великобритания" />
+
+
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
