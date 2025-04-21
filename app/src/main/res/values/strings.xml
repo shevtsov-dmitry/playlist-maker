@@ -23,4 +23,5 @@
     <string name="open_music_folder">Открыть папку с музыкой</string>
     <string name="media_title">Медиатека</string>
     <string name="search_song">Искать песню</string>
+    <string name="play_icon">▶</string>
 </resources>

@@ -70,7 +70,10 @@ class MediaActivity : AppCompatActivity() {
 
 
         val projection = arrayOf(
-            MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.DATA
+            MediaStore.Audio.Media._ID,
+            MediaStore.Audio.Media.TITLE,
+            MediaStore.Audio.Media.DATA,
+            MediaStore.Audio.Media.ARTIST
         )
 
         val resolver: ContentResolver = contentResolver

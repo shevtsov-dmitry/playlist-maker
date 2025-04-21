@@ -65,8 +65,10 @@ class SearchActivity : AppCompatActivity() {
         val projection = arrayOf(
             MediaStore.Audio.Media._ID,
             MediaStore.Audio.Media.TITLE,
-            MediaStore.Audio.Media.DATA
+            MediaStore.Audio.Media.DATA,
+            MediaStore.Audio.Media.ARTIST
         )
+
 
         val selection = "${MediaStore.Audio.Media.DATA} LIKE ? AND ${MediaStore.Audio.Media.TITLE} LIKE ?"
         val selectionArgs = arrayOf("%/Music/%", "%${filter ?: ""}%")
