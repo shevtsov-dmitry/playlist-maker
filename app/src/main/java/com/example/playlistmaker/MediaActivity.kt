@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ListView
@@ -92,8 +93,8 @@ class MediaActivity : AppCompatActivity() {
     }
 
     private fun openSongsFolder() {
-        val musicDirectory = "/storage/emulated/0/Music/"
-        val directory = File(musicDirectory)
+        val musicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
+        val directory = File(musicDirectory.path)
 
         if (directory.exists() && directory.isDirectory) {
             val folderUri = Uri.parse("file://$musicDirectory") // Use 'file://' URI
