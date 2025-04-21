@@ -34,6 +34,21 @@ class MediaActivity : AppCompatActivity() {
         val songListView: ListView = findViewById(R.id.songListView)
         val noSongsMessage: TextView = findViewById(R.id.no_songs_message)
 
+        songListView.setOnItemClickListener { parent, view, position, id ->
+            val cursor = parent.getItemAtPosition(position) as Cursor
+            val songTitle =
+                cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE))
+            val songPath =
+                cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA))
+
+            val intent = Intent(this, PlayerActivity::class.java).apply {
+                putExtra("song_title", songTitle)
+                putExtra("song_path", songPath)
+            }
+            startActivity(intent)
+        }
+
+
         val songs = getSongsFromStorage()
         val songsAmount = songs?.count ?: 0
 
