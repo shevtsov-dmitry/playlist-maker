@@ -1,5 +1,7 @@
 package com.example.playlistmaker
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
@@ -10,22 +12,31 @@ import androidx.appcompat.app.AppCompatActivity
 class PlayerActivity : AppCompatActivity() {
 
     private lateinit var playPauseButton: ImageButton
+    private lateinit var likeButton: ImageButton
     private lateinit var timerTextView: TextView
     private lateinit var titleTextView: TextView
     private lateinit var mediaPlayer: MediaPlayer
+
     private var isPlaying = false
     private val handler = Handler(Looper.getMainLooper())
+
+    private var songPath: String? = null
+    private var songTitle: String = "Unknown"
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
 
+        // UI references
         playPauseButton = findViewById(R.id.play_pause_button)
+        likeButton = findViewById(R.id.like_button)
         timerTextView = findViewById(R.id.timer)
         titleTextView = findViewById(R.id.song_title)
 
-        val songTitle = intent.getStringExtra("song_title") ?: "Unknown"
-        val songPath = intent.getStringExtra("song_path")
+        // Data from intent
+        songTitle = intent.getStringExtra("song_title") ?: "Unknown"
+        songPath = intent.getStringExtra("song_path")
 
         titleTextView.text = songTitle
 
@@ -35,13 +46,23 @@ class PlayerActivity : AppCompatActivity() {
             return
         }
 
+        sharedPreferences = getSharedPreferences("favorites", Context.MODE_PRIVATE)
+
+        // Initialize player
         mediaPlayer = MediaPlayer().apply {
             setDataSource(songPath)
             prepare()
         }
 
+        // Like button icon state
+        updateLikeButton()
+
         playPauseButton.setOnClickListener {
             if (isPlaying) pauseMusic() else playMusic()
+        }
+
+        likeButton.setOnClickListener {
+            toggleFavorite()
         }
     }
 
@@ -68,6 +89,32 @@ class PlayerActivity : AppCompatActivity() {
                 if (isPlaying) handler.postDelayed(this, 500)
             }
         }, 0)
+    }
+
+    private fun toggleFavorite() {
+        val favorites = sharedPreferences.getStringSet("favorite_songs", mutableSetOf()) ?: mutableSetOf()
+        val editor = sharedPreferences.edit()
+
+        if (favorites.contains(songPath)) {
+            favorites.remove(songPath)
+            Toast.makeText(this, "Удалено из избранного", Toast.LENGTH_SHORT).show()
+        } else {
+            favorites.add(songPath)
+            Toast.makeText(this, "Добавлено в избранное", Toast.LENGTH_SHORT).show()
+        }
+
+        editor.putStringSet("favorite_songs", favorites)
+        editor.apply()
+        updateLikeButton()
+    }
+
+    private fun updateLikeButton() {
+        val favorites = sharedPreferences.getStringSet("favorite_songs", emptySet()) ?: emptySet()
+        val isLiked = favorites.contains(songPath)
+        likeButton.setImageResource(
+            if (isLiked) android.R.drawable.btn_star_big_on
+            else android.R.drawable.btn_star_big_off
+        )
     }
 
     override fun onDestroy() {
